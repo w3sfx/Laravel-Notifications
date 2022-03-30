@@ -8,9 +8,22 @@ use App\Http\Controllers\Controller;
 
 class PostController extends Controller
 {
-    public function index(Post $post){
-        $posts = $post->paginate();
+    private $post;
+
+    public function __construct(Post $post){
+        $this->post = $post;
+    }
+
+    public function index(){
+        $posts = $this->post->paginate();
 
         return view('posts.index', compact('posts'));
+    }
+
+    public function show($id){
+
+        $post = $this->post->find($id);
+
+        return view('posts.show', compact('post'));
     }
 }
