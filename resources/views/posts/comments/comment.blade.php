@@ -34,3 +34,16 @@
 @else
     <p>Precisa estar logado para fazer os comentários. <a href="{{ route('login') }}">Clique aqui para entrar</a></p>
 @endif
+
+<hr>
+<h3>Comentários ({{ $post->comments->count() }})</h3>
+@forelse ($post->comments as $comment)
+    <p>
+        <b>{{ $comment->user->name }} comentou: </b>
+        {{ $comment->title }} - {{ $comment->body }}
+    </p>
+
+    <hr>
+@empty
+
+@endforelse
